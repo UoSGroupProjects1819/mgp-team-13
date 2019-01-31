@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Group 13 - serious-talk</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        /* === GENERAL === */
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+    white-space: pre-wrap;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.emoji {
+    width: 24px;
+    height: 24px;
+    margin: 0 1px;
+    vertical-align: middle;
+}
+
+.emoji--small {
+    width: 16px;
+    height: 16px;
+}
+
+.emoji--large {
+    width: 32px;
+    height: 32px;
+}
+
+.mention {
+    font-weight: 600;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 5px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 600;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;    
+}
+
+.chatlog__reaction {
+    margin: 6px 2px 2px 2px;
+    padding: 2px 6px 2px 2px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-emoji {
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+.chatlog__reaction-count {
+    font-size: .875em;
+    vertical-align: middle;
+}
+/* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #ffffffb3;
+}
+
+a {
+    color: #0096cf;
+}
+
+.pre {
+    background-color: #2f3136;
+}
+
+.pre--multiline {
+    border-color: #282b30;
+    color: #839496;
+}
+
+.mention {
+    background-color: #738bd71a;
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: #ffffff0a;
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: #ffffff33;
+}
+
+.chatlog__edited-timestamp {
+    color: #ffffff33;
+}
+
+.chatlog__embed-content-container {
+    background-color: #2e30364d;
+    border-color: #2e303699;
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: #ffffff99;
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: #ffffff99;
+}
+
+.chatlog__embed-footer {
+    color: #ffffff99;
+}
+
+.chatlog__reaction {
+    background-color: #ffffff0a;
+}
+
+.chatlog__reaction-count {
+    color: #ffffff4d;
+}
+    </style>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">Group 13</div>
+        <div class="info__channel-name">serious-talk</div>
+        
+
+        <div class="info__channel-message-count">25 messages</div>
+        
+            <div class="info__channel-date-range">
+                    After 30-Jan-19 12:00 AM
+            </div>
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:40 PM</span>
+
+                        <div class="chatlog__content">
+                            Hi everybody, just to let you know I&#39;ve put up a sprint with a couple of tasks for each of you, if you&#39;re having trouble logging into Jira or GitHub and joining the groups then let me know.
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149807608793006080/a_c8fbe266dd4ccddf9cedb223ae40d2b5.gif" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Tate Diabeetus#0115">Tate Diabeetus</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:45 PM</span>
+
+                        <div class="chatlog__content">
+                            I&#39;ve gotten on to Jira now and see the tasks
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:45 PM</span>
+
+                        <div class="chatlog__content">
+                            Just logged in, I see the tasks too
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            Roughly speaking, how long should the brief outline be?
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:55 PM</span>
+
+                        <div class="chatlog__content">
+                            It should sum up your opinions and thoughts with reasonable research and design, if you think that what you have written is enough then you can upload it to GitHub and I can take a look. I&#39;m not looking for a 1500 word essay just enough to get your point across in a reasonable and clear to understand way.
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">30-Jan-19 04:56 PM</span>
+
+                        <div class="chatlog__content">
+                            Alright, I&#39;ll get straight to work on that
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">30-Jan-19 05:11 PM</span>
+
+                        <div class="chatlog__content">
+                            I&#39;ve also put the Outline Project Brief template on GitHub for you to use if you can&#39;t find it on Brightspace
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">30-Jan-19 06:37 PM</span>
+
+                        <div class="chatlog__content">
+                            Completed research and the outline brief, if anything needs to be changed let me know ASAP.
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">30-Jan-19 06:39 PM</span>
+
+                        <div class="chatlog__content">
+                            Okay I will give it a look and let you know as soon as I can
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:43 PM</span>
+
+                        <div class="chatlog__content">
+                            <a href="https://github.com/UoSGroupProjects1819/mgp-team-13">https://github.com/UoSGroupProjects1819/mgp-team-13</a>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/UoSGroupProjects1819/mgp-team-13">UoSGroupProjects1819/mgp-team-13</a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">mgp-team-13 created by GitHub Classroom. Contribute to UoSGroupProjects1819/mgp-team-13 development by creating an account on GitHub.</div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars0.githubusercontent.com/u/43602846?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars0.githubusercontent.com/u/43602846?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            If any of you don&#39;t know how to use GitHub I can meet with you on Wednesday and go over what you need to do to put your work onto it, I&#39;ll use Github to check your work to see if it&#39;s up to standard and get back to you with some feedback
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:50 PM</span>
+
+                        <div class="chatlog__content">
+                            Appears that GitHub is pretty straightforward to use, should I upload both my research and my outline brief into the &quot;outline brief&quot; folder, or just the outline brief?
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:52 PM</span>
+
+                        <div class="chatlog__content">
+                            I&#39;ll add a new folder in a second for research
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:52 PM</span>
+
+                        <div class="chatlog__content">
+                            Alright, I&#39;ll keep checking to see when it goes live
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:52 PM</span>
+
+                        <div class="chatlog__content">
+                            Oh I already have a folder for research
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            it should be under the programming folder
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:53 PM</span>
+
+                        <div class="chatlog__content">
+                            I see it now, somehow I missed it. I&#39;ll add the appropriate files now
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:54 PM</span>
+
+                        <div class="chatlog__content">
+                            Okay no problem
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            Another thing, make sure that if you&#39;re using GitHub Desktop be careful you&#39;re not pulling when someone else is pushing or visa versa
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            Because it breaks if you do that so it might be a good idea to say in here when you are doing either of those things just so people don&#39;t break the repository
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:58 PM</span>
+
+                        <div class="chatlog__content">
+                            Would you say that getting the desktop version would be better than using the web version? Or are they both ok to use?
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 10:59 PM</span>
+
+                        <div class="chatlog__content">
+                            They&#39;re both okay to use, I personally prefer the desktop version but neither of them are any better than the other, I can go over it in our next meeting if you want me to?
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 11:00 PM</span>
+
+                        <div class="chatlog__content">
+                            That might be an idea just to make sure I don&#39;t accidentally do anything wrong (not that I think I will, but I&#39;d rather make sure anyway)
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/184648104732000256/59cd624a77b674efd662c7bb7610db95.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Cleagler#7542">Cleagler</span>
+                <span class="chatlog__timestamp">31-Jan-19 11:00 PM</span>
+
+                        <div class="chatlog__content">
+                            Yeah of course that&#39;s perfectly fine, I&#39;ll make a note of it and I&#39;ll go over it with whoever wants to hear it
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/156894423094001664/625feda01c35c9a6b7ebd36e6079b788.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="MagnusBeefsound#6481">MagnusBeefsound</span>
+                <span class="chatlog__timestamp">31-Jan-19 11:01 PM</span>
+
+                        <div class="chatlog__content">
+                            Fantastic, thank you &#128077;
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
